@@ -43,9 +43,8 @@ jobs:
       - name: Checkout opensbi
         uses: actions/checkout@v4
         with:
-          repository: revyos/opensbi
+          repository: sophgo/opensbi
           path: opensbi
-          ref: sg2042-v1.4
 
       - name: Checkout sophgo-edk2
         uses: actions/checkout@v4
