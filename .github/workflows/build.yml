@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         M_CHIP_NUM: [single, multi]
-        LINUX_BRANCH: [sg2042-v6.1-lts, sg2042-v6.6-lts-v0p7]
+        LINUX_BRANCH: [sg2042-v6.6-lts-v0p7]
 
     env:
       mainline_toolchain: https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2024.03.01
