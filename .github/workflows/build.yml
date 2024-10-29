@@ -76,6 +76,7 @@ jobs:
                                   automake autotools-dev python3 libmpc-dev libmpfr-dev libgmp-dev \
                                   texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev \
                                   ninja-build uuid-dev gcc-riscv64-unknown-elf
+              sudo apt install -y linux-firmware
               update-binfmts --display
               ${wget_alias} ${mainline_toolchain}/${mainline_toolchain_file_name}
               tar -xvf ${mainline_toolchain_file_name} -C /opt
