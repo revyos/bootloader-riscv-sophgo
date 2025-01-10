@@ -1794,6 +1794,10 @@ function build_rv_firmware_bin()
 	pushd $RV_FIRMWARE_INSTALL_DIR
 
 	rm -f firmware*.bin
+	# hack: for zsbl: rename device tree/replace riscv64_Image
+	rm -rvf riscv64_Image
+	cp -vf SG2042.fd riscv64_Image
+	cp -vf sg2042-milkv-pioneer.dtb mango-milkv-pioneer.dtb
 	cp $RV_FIRMWARE/fip.bin  ./
 	dtb_group=$(ls *.dtb | awk '{print ""$1" "$1" 0x020000000 "}')
 
@@ -1855,15 +1859,17 @@ function build_rv_firmware_image()
 	sudo cp $RV_FIRMWARE/fsbl.bin efi/riscv64
 	sudo cp zsbl.bin efi/riscv64
 	else
-	sudo cp $RV_FIRMWARE/fip.bin efi/
-	sudo cp zsbl.bin efi/
+	sudo cp -vf $RV_FIRMWARE/fip.bin efi/
+	sudo cp -vf zsbl.bin efi/
 	fi
-	sudo cp riscv64_Image efi/riscv64
-	sudo cp *.dtb efi/riscv64
-	sudo cp initrd.img efi/riscv64
-	sudo cp fw_dynamic.bin efi/riscv64
+	# hack: for zsbl: rename device tree/replace riscv64_Image/empty file for initrd
+	#sudo cp riscv64_Image efi/riscv64
+	sudo cp -vf *.dtb efi/riscv64
+	sudo cp -vf sg2042-milkv-pioneer.dtb efi/riscv64/mango-milkv-pioneer.dtb
+	sudo cp -vf initrd.img efi/riscv64
+	sudo cp -vf fw_dynamic.bin efi/riscv64
 	# sudo cp uboot.bin efi/riscv64
-	sudo cp SG2042.fd efi/riscv64
+	sudo cp -vf SG2042.fd efi/riscv64/riscv64_Image
 	sudo touch efi/BOOT
 
 	echo cleanup...
