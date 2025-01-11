@@ -1863,13 +1863,15 @@ function build_rv_firmware_image()
 	sudo cp -vf zsbl.bin efi/
 	fi
 	# hack: for zsbl: rename device tree/replace riscv64_Image/empty file for initrd
-	#sudo cp riscv64_Image efi/riscv64
+	#sudo cp -vf riscv64_Image efi/riscv64
 	sudo cp -vf *.dtb efi/riscv64
 	sudo cp -vf sg2042-milkv-pioneer.dtb efi/riscv64/mango-milkv-pioneer.dtb
 	sudo cp -vf initrd.img efi/riscv64
 	sudo cp -vf fw_dynamic.bin efi/riscv64
 	# sudo cp uboot.bin efi/riscv64
+	sudo cp -vf SG2042.fd efi/riscv64/SG2042.fd
 	sudo cp -vf SG2042.fd efi/riscv64/riscv64_Image
+	sudo cp -vf $RV_FIRMWARE/conf.ini efi/riscv64/conf.ini
 	sudo touch efi/BOOT
 
 	echo cleanup...
