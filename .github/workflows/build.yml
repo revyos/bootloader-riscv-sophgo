@@ -43,8 +43,9 @@ jobs:
       - name: Checkout opensbi
         uses: actions/checkout@v4
         with:
-          repository: sophgo/opensbi
+          repository: riscv-software-src/opensbi
           path: opensbi
+          ref: v1.6
 
       - name: Checkout linux-riscv
         uses: actions/checkout@v4
