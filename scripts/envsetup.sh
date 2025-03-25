@@ -1769,7 +1769,6 @@ function build_rv_firmware()
 		build_rv_kernel tp
 	else
 		build_rv_kernel
-		build_rv_edk2
 	fi
 
 	build_rv_uroot
@@ -1802,7 +1801,7 @@ function build_rv_firmware_bin()
 			riscv64_Image riscv64_Image 0x02000000 \
 			initrd.img initrd.img 0x30000000 \
 			zsbl.bin zsbl.bin 0x40000000	\
-			SG2042.fd SG2042.fd 0x02000000
+		#	SG2042.fd SG2042.fd 0x02000000
 		#	uboot.bin uboot.bin 0x02000000
 
 	mv spi_flash.bin firmware-$version.bin
@@ -1863,7 +1862,7 @@ function build_rv_firmware_image()
 	sudo cp initrd.img efi/riscv64
 	sudo cp fw_dynamic.bin efi/riscv64
 	# sudo cp uboot.bin efi/riscv64
-	sudo cp SG2042.fd efi/riscv64
+	# sudo cp SG2042.fd efi/riscv64
 	sudo touch efi/BOOT
 
 	echo cleanup...
@@ -1902,7 +1901,7 @@ function build_rv_firmware_package()
 	cp zsbl.bin firmware
 	fi
 	# cp u-boot.bin firmware/riscv64
-	cp SG2042.fd firmware/riscv64
+	# cp SG2042.fd firmware/riscv64
 	cp riscv64_Image firmware/riscv64
 	cp *.dtb firmware/riscv64
 	cp initrd.img firmware/riscv64
