@@ -676,7 +676,7 @@ function clean_rv_fedora_grub()
 
 function build_rv_kernel()
 {
-	local RV_KERNEL_CONFIG=${VENDOR}_${CHIP}_${KERNEL_VARIANT}_defconfig
+	local RV_KERNEL_CONFIG=kexec_defconfig
 	local err
 
 	if [ "$CHIP" = "bm1690" ];then
@@ -719,7 +719,7 @@ function build_rv_kernel()
 	fi
 
 	if [ $CHIP != 'qemu' ]; then
-	    cp $RV_KERNEL_BUILD_DIR/arch/riscv/boot/dts/sophgo/*.dtb $RV_FIRMWARE_INSTALL_DIR
+	    cp $RV_KERNEL_BUILD_DIR/arch/riscv/boot/dts/sophgo/sg2042-*.dtb $RV_FIRMWARE_INSTALL_DIR
 	fi
 }
 
