@@ -40,6 +40,10 @@ jobs:
           repository: sophgo/zsbl
           path: zsbl
 
+      - name: For upstream kernel modify zsbl
+        run: |
+              sed -i "s/mango-/sg2042-/g" zsbl/plat/sg2042/plat.c
+
       - name: Checkout opensbi
         uses: actions/checkout@v4
         with:
