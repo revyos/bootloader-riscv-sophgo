@@ -43,6 +43,7 @@ jobs:
       - name: For upstream kernel modify zsbl
         run: |
               sed -i "s/mango-/sg2042-/g" zsbl/plat/sg2042/plat.c
+              sed -i "s@/dev/ram0@/dev/ram0 percpu_alloc=page pcie_ports=compat@g" zsbl/plat/sg2042/plat.c
 
       - name: Checkout opensbi
         uses: actions/checkout@v4
