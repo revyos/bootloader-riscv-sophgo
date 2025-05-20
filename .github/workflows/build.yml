@@ -1,4 +1,4 @@
-name: sophgo-bootloader
+name: sg2042-bootloader
 
 on:
   push:
@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        M_CHIP_NUM: [single, multi]
-        LINUX_BRANCH: [sg2042-dev, sg2042-dev-6.6]
+        M_CHIP_NUM: [single]
+        LINUX_BRANCH: [sg2042-upstream-v6.15.y, sg2042-upstream-v6.14.y, sg2042-upstream-v6.6.y]
 
     env:
       mainline_toolchain: https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2024.03.01
@@ -50,7 +50,7 @@ jobs:
       - name: Checkout linux-riscv
         uses: actions/checkout@v4
         with:
-          repository: sophgo/linux-riscv
+          repository: revyos/sg2042-vendor-kernel
           path: linux-riscv
           ref: ${{ matrix.LINUX_BRANCH }}
 
@@ -126,6 +126,6 @@ jobs:
       - name: 'Upload Build Artifact'
         uses: actions/upload-artifact@v4
         with:
-          name: sophgo-bootloader-${{ matrix.M_CHIP_NUM }}-${{ matrix.LINUX_BRANCH }}
+          name: sg2042-bootloader-${{ matrix.M_CHIP_NUM }}-${{ matrix.LINUX_BRANCH }}
           path: firmware_*
           retention-days: 30
