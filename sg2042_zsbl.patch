@@ -1,0 +1,46 @@
+diff --git a/plat/sg2042/plat.c b/plat/sg2042/plat.c
+index 4b9fe5a..bd5e2e7 100644
+--- a/plat/sg2042/plat.c
++++ b/plat/sg2042/plat.c
+@@ -140,7 +140,7 @@ static void config_init(struct config *cfg)
+ {
+ 	cfg->sbi.name = "fw_dynamic.bin";
+ 	cfg->sbi.addr = OPENSBI_ADDR;
+-	cfg->dtb.name = "mango-sophgo-x8evb.dtb";
++	cfg->dtb.name = "sg2042-milkv-pioneer.dtb";
+ 	cfg->dtb.addr = DEVICETREE_ADDR;
+ 	cfg->kernel.name = "riscv64_Image";
+ 	cfg->kernel.addr = KERNEL_ADDR;
+@@ -182,10 +182,10 @@ static int build_ddr_info(struct config *cfg, int chip_num)
+ }
+ 
+ const char *dtb_names[] = {
+-	"mango-sophgo-x8evb.dtb",
+-	"mango-milkv-pioneer.dtb",
+-	"mango-sophgo-pisces.dtb",
+-	"mango-sophgo-x4evb.dtb",
++	"sg2042-evb-v1.dtb",
++	"sg2042-milkv-pioneer.dtb",
++	"sg2042-sophgo-pisces.dtb",
++	"sg2042-evb-v2.dtb",
+ };
+ 
+ static void build_board_info(struct config *cfg)
+@@ -364,7 +364,7 @@ static int modify_bootargs(struct config *cfg)
+ 
+ 	fdt = (void *)cfg->dtb.addr;
+ 	ramfs = (void*)cfg->ramfs.addr;
+-	sprintf(append, "root=/dev/ram0 rw initrd=0x%lx,32M", (unsigned long)ramfs);
++	sprintf(append, "root=/dev/ram0 pcie_ports=compat rw initrd=0x%lx,32M", (unsigned long)ramfs);
+ 
+ 	node = fdt_path_offset(fdt, "/chosen");
+ 	if (node < 0) {
+@@ -385,7 +385,7 @@ static int modify_bootargs(struct config *cfg)
+ 		sprintf(bootargs, "%s %s", (char*)prop->data, append);
+ 	} else {
+ 		sprintf(bootargs,
+-			"console=ttyS0,115200 earlycon root=/dev/ram0 rw initrd=0x%lx,32M",
++			"console=ttyS0,115200 earlycon root=/dev/ram0 pcie_ports=compat rw initrd=0x%lx,32M",
+ 			(unsigned long)ramfs);
+ 	}
+ 	ret = fdt_setprop_string(fdt, node, "bootargs", bootargs);
